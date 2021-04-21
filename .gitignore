@@ -30,7 +30,7 @@ web_modules/
 .node_repl_history
 *.tgz
 .yarn-integrity
-#.env
+.env
 .env.test
 .cache
 .parcel-cache
