@@ -68,7 +68,7 @@ var storage = multer.diskStorage({
 
     },
     filename: function (req, file, cb) {
-        cb(null, `${uuidv4()}`);
+        cb(null, `${uuidv4()}.${mime.extension(file.mimetype)}`);
     }
 })
 
@@ -94,6 +94,12 @@ Limit miejsca na dane
 ustawienia sharex z backendu
 
 */
+
+router.get('/', function (req,res,next){
+	res.status(301).redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+})
+
+
 router.post('/upload', appToken, upload.single('file'), async function (req, res, next){
     if(req.fileNotSupported) return res.status(400).render('error', {message: "File format not supported", error: {status: 400}});
     const user = req.user;
@@ -130,7 +136,7 @@ router.post('/upload', appToken, upload.single('file'), async function (req, res
     const resp = {
         status: 200,
         data: {
-            "url": `http://localhost:3000/files/${dFile.filename}`,
+            "url": `https://cdn.kalibrm.xyz/${dFile.filename}`,
         }
     }
 
